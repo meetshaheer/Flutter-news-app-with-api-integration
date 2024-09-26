@@ -66,7 +66,9 @@ class _newsAPIState extends State<newsAPI> {
                   itemBuilder: (context, index) {
                     var data = resposeData[index];
                     return ListTile(
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => NewWidget(data: data)));
+                      },
                       title: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -98,5 +100,66 @@ class _newsAPIState extends State<newsAPI> {
             );
           }),
     );
+  }
+}
+
+class NewWidget extends StatelessWidget {
+  const NewWidget({
+    super.key,
+    required this.data,
+  });
+
+  final Article data;
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(data.title ?? ""),
+      ),
+      body: Column(
+        children: [
+          Container(
+            width: double.infinity,
+            height: 300,
+            decoration: BoxDecoration(),
+            child: Image(
+              fit: BoxFit.cover,
+              image: NetworkImage(data.urlToImage ?? "https://via.placeholder.com/150"),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Text(data.description ?? ""),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Text(data.content ?? ""),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 20.0),
+            child: Align(
+              alignment: Alignment.topLeft,
+              child: Text(
+                data.author ?? "",
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 20.0),
+            child: Align(alignment: Alignment.topLeft, child: Text(data.publishedAt ?? "")),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class separatePage extends StatelessWidget {
+  const separatePage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Placeholder();
   }
 }
