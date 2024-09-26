@@ -27,7 +27,7 @@ class newsAPI extends StatefulWidget {
 
 List<Article> resposeData = [];
 
-Future<List<Article>>getNewsAPI() async {
+Future<List<Article>> getNewsAPI() async {
   var url = Uri.parse(
       "https://newsapi.org/v2/everything?q=apple&from=2024-09-24&to=2024-09-24&sortBy=popularity&apiKey=a68ea7f819eb47d093b67111b570b654");
 
@@ -53,6 +53,50 @@ class _newsAPIState extends State<newsAPI> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Apple News App"),
+      ),
+      body: FutureBuilder(
+          future: getNewsAPI(),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              return ListView.builder(
+                  itemCount: resposeData.length,
+                  itemBuilder: (context, index) {
+                    var data = resposeData[index];
+                    return ListTile(
+                      onTap: () {},
+                      title: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            data.title ?? "",
+                            style: const TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          Text(data.description ?? ""),
+                          Text("Author:  ${data.author}" ?? ""),
+                          Text(data.publishedAt ?? ""),
+                          const SizedBox(
+                            height: 50,
+                          )
+                        ],
+                      ),
+                      leading: Image(
+                        image: NetworkImage(data.urlToImage ?? 'https://via.placeholder.com/150'),
+                        width: 100,
+                        height: 100,
+                      ),
+                    );
+                  });
+            }
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }),
+    );
   }
 }
