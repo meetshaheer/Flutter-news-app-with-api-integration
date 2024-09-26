@@ -10,50 +10,106 @@ class homeView extends StatefulWidget {
 class _homeViewState extends State<homeView> {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-        backgroundColor: Colors.white,
-        appBar: PreferredSize(
-            preferredSize: Size.fromHeight(60),
-            child: Padding(
-              padding: EdgeInsets.only(top: 60, left: 25),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: const PreferredSize(
+        preferredSize: Size.fromHeight(60),
+        child: Padding(
+          padding: EdgeInsets.only(top: 40, left: 25),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: EdgeInsets.only(top: 3),
+                child: const CircleAvatar(
+                  backgroundColor: Color.fromARGB(255, 48, 48, 48),
+                  radius: 9,
+                ),
+              ),
+              const SizedBox(
+                width: 10,
+              ),
+              const Text(
+                "Bulletin News",
+                style: TextStyle(fontFamily: "Play", fontWeight: FontWeight.bold, fontSize: 15),
+              ),
+              SizedBox(
+                width: 190,
+              ),
+              Stack(
                 children: [
-                  const CircleAvatar(
-                    backgroundColor: Color.fromARGB(255, 48, 48, 48),
-                    radius: 9,
+                  CircleAvatar(
+                    backgroundImage: AssetImage("assets/images/profile.jpg"),
                   ),
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  const Text(
-                    "Bulletin News",
-                    style: TextStyle(fontFamily: "Roboto", fontWeight: FontWeight.bold, fontSize: 17),
-                  ),
-                  SizedBox(
-                    width: 185,
-                  ),
-                  Stack(
-                    children: [
-                      CircleAvatar(
-                        backgroundImage: AssetImage("assets/images/profile.jpg"),
+                  Positioned(
+                    bottom: 0,
+                    right: 0,
+                    child: CircleAvatar(
+                      backgroundColor: Colors.white,
+                      radius: 6.5,
+                      child: CircleAvatar(
+                        radius: 5,
+                        backgroundColor: Colors.green,
                       ),
-                      Positioned(
-                        bottom: 0,
-                        right: 0,
-                        child: CircleAvatar(
-                          backgroundColor: Colors.white,
-                          radius: 6.5,
-                          child: CircleAvatar(
-                            radius: 5,
-                            backgroundColor: Colors.green,
-                          ),
-                        ),
-                      )
-                    ],
+                    ),
                   )
                 ],
-              ),
-            )));
+              )
+            ],
+          ),
+        ),
+      ),
+      body: Padding(
+        padding: EdgeInsets.only(top: 15, left: 25, right: 25),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Row(
+              children: [
+                Text(
+                  "Thursday, August 26th",
+                  style: TextStyle(
+                      color: Color.fromARGB(255, 167, 167, 167),
+                      fontSize: 10,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: "Play"),
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            const Text(
+              "Welcome back,",
+              style: TextStyle(fontSize: 25, fontWeight: FontWeight.w700, fontFamily: "Play"),
+            ),
+            const Text(
+              "Jennifer",
+              style: TextStyle(fontSize: 25, fontWeight: FontWeight.w700, fontFamily: "Play"),
+            ),
+            SizedBox(
+              height: 250,
+              child: ListView.builder(
+                  shrinkWrap: false,
+                  scrollDirection: Axis.horizontal,
+                  itemCount: 4,
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(10),
+                        child: Container(
+                          width: 320,
+                          color: Colors.red,
+                          child: Text("a"),
+                        ),
+                      ),
+                    );
+                  }),
+            )
+          ],
+        ),
+      ),
+    );
   }
 }
