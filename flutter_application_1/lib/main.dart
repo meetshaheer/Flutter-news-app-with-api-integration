@@ -76,22 +76,15 @@ class _newsAPIState extends State<newsAPI> {
                             data.title ?? "",
                             style: const TextStyle(fontWeight: FontWeight.bold),
                           ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          Text(data.description ?? ""),
                           Text("Author:  ${data.author}" ?? ""),
                           Text(data.publishedAt ?? ""),
-                          const SizedBox(
-                            height: 50,
-                          )
                         ],
                       ),
-                      leading: Image(
-                        image: NetworkImage(data.urlToImage ?? 'https://via.placeholder.com/150'),
-                        width: 100,
-                        height: 100,
-                      ),
+                      leading: Container(
+                          width: 100,
+                          child: Image(
+                            image: NetworkImage(data.urlToImage ?? "https://via.placeholder.com/150"),
+                          )),
                     );
                   });
             }
