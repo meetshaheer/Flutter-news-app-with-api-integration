@@ -27,7 +27,7 @@ class newsAPI extends StatefulWidget {
 
 List<Article> resposeData = [];
 
-getNewsAPI() async {
+Future<List<Article>>getNewsAPI() async {
   var url = Uri.parse(
       "https://newsapi.org/v2/everything?q=apple&from=2024-09-24&to=2024-09-24&sortBy=popularity&apiKey=a68ea7f819eb47d093b67111b570b654");
 
@@ -35,7 +35,12 @@ getNewsAPI() async {
   var responsebody = jsonDecode(response.body);
 
   var filterrespose = responsebody['articles'];
-  print(filterrespose);
+
+  for (var eachMap in filterrespose) {
+    resposeData.add(Article.fromJson(eachMap));
+  }
+
+  return resposeData;
 }
 
 class _newsAPIState extends State<newsAPI> {
@@ -48,8 +53,6 @@ class _newsAPIState extends State<newsAPI> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      
-    );
+    return Scaffold();
   }
 }
