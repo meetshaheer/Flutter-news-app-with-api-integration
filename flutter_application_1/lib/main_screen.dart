@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/Models/news_model.dart';
+import 'package:flutter_application_1/News_Apis.dart/apple_api.dart';
 
 class homeView extends StatefulWidget {
   const homeView({super.key});
@@ -89,24 +91,50 @@ class _homeViewState extends State<homeView> {
             ),
             SizedBox(
               height: 250,
-              child: ListView.builder(
-                  shrinkWrap: false,
-                  scrollDirection: Axis.horizontal,
-                  itemCount: 4,
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(10),
-                        child: Container(
-                          width: 320,
-                          color: Colors.red,
-                          child: Text("a"),
-                        ),
-                      ),
+              child: FutureBuilder(
+                future: getAppleNews(),
+                builder: (context, AsyncSnapshot<List<Article>> snapshot) {
+                  if (snapshot.hasData) {
+                    return ListView.builder(
+                      shrinkWrap: false,
+                      scrollDirection: Axis.horizontal,
+                      itemCount: appleData.length,
+                      itemBuilder: (context, index) {
+                        var data = appleData[index];
+                        return Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(10),
+                            child: Container(
+                              width: 320,
+                              color: Colors.red,
+                              child: Text(data.title ?? ""),
+                            ),
+                          ),
+                        );
+                      },
                     );
-                  }),
-            )
+                  }
+                  return ListView.builder(
+                    shrinkWrap: false,
+                    scrollDirection: Axis.horizontal,
+                    itemCount: 2,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(10),
+                          child: Container(
+                            width: 320,
+                            color: Colors.red,
+                          ),
+                        ),
+                      );
+                    },
+                  );
+                },
+              ),
+            ),
           ],
         ),
       ),

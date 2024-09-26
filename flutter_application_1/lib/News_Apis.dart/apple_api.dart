@@ -1,0 +1,23 @@
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+import 'package:flutter_application_1/Models/news_model.dart';
+
+List<Article> appleData = [];
+
+Future<List<Article>> getAppleNews() async {
+  var url = Uri.parse(
+      "https://newsapi.org/v2/everything?q=apple&from=2024-09-24&to=2024-09-24&sortBy=popularity&apiKey=a68ea7f819eb47d093b67111b570b654");
+
+  var response = await http.get(url);
+  var responsebody = jsonDecode(response.body);
+
+  var filterrespose = responsebody['articles'];
+
+  for (var eachMap in filterrespose) {
+    if (eachMap['title'] != "[Removed]") {
+      appleData.add(Article.fromJson(eachMap));
+    }
+  }
+
+  return appleData;
+}
