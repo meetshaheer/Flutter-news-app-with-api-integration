@@ -135,6 +135,7 @@ class _homeViewState extends State<homeView> {
                 },
               ),
             ),
+            coura
           ],
         ),
       ),
