@@ -1,6 +1,6 @@
 import 'dart:convert';
+import 'package:UKBD/Models/news_model.dart';
 import 'package:http/http.dart' as http;
-import 'package:flutter_application_1/Models/news_model.dart';
 
 List<Article> appleData = [];
 String placeholder = "https://knetic.org.uk/wp-content/uploads/2020/07/Pcture-Placeholder.png";
